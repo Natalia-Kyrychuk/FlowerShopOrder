@@ -18,6 +18,7 @@ import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import java.util.List;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -55,19 +56,36 @@ public class MainLayout extends AppLayout implements AfterNavigationObserver {
     }
 
     private SideNav createNavigation() {
+
         SideNav nav = new SideNav();
 
-        List<MenuEntry> menuEntries = MenuConfiguration.getMenuEntries();
-        menuEntries.forEach(entry -> {
-            if (entry.icon() != null) {
-                nav.addItem(new SideNavItem(entry.title(), entry.path(), new SvgIcon(entry.icon())));
-            } else {
-                nav.addItem(new SideNavItem(entry.title(), entry.path()));
-            }
-        });
+        nav.addItem(
+                new SideNavItem(
+                        "Home",
+                        "",
+                        VaadinIcon.HOME.create()
+                )
+        );
+
+        nav.addItem(
+                new SideNavItem(
+                        "Preise",
+                        "preise",
+                        VaadinIcon.MONEY.create()
+                )
+        );
+
+        nav.addItem(
+                new SideNavItem(
+                        "Sortiment",
+                        "sortiment",
+                        VaadinIcon.PACKAGE.create()
+                )
+        );
 
         return nav;
     }
+
 
     private Footer createFooter() {
         Footer layout = new Footer();
