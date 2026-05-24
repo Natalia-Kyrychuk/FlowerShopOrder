@@ -19,10 +19,6 @@ public class SortimentView extends VerticalLayout {
 
         setSpacing(false);
 
-        Image img = new Image("images/empty-plant.png", "placeholder plant");
-        img.setWidth("200px");
-
-        add(img);
 
         H2 header = new H2("Sortiment");
 

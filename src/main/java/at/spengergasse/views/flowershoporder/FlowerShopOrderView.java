@@ -1,7 +1,9 @@
 package at.spengergasse.views.flowershoporder;
 
 import at.spengergasse.views.MainLayout;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -20,24 +22,75 @@ public class FlowerShopOrderView extends VerticalLayout {
     public FlowerShopOrderView() {
 
         setSpacing(false);
+        setAlignItems(Alignment.CENTER);
 
-        Image img = new Image("images/empty-plant.png", "placeholder plant");
-        img.setWidth("200px");
+        H1 company = new H1("Flower Shop Order");
+        company.getStyle()
+                .set("font-family", "cursive")
+                .set("font-size", "6rem")
+                .set("margin", "0");
 
-        add(img);
+        H2 subName = new H2("... beautiful flowers for every occasion ...");
+        subName.getStyle()
+                .set("margin", "0")
+                .set("color", "gray");
 
-        H2 header = new H2("This place intentionally left empty");
+        Image logo = new Image("images/logo.png", "Flower Shop Logo");
+        logo.setWidth("350px");
 
-        header.addClassNames(
-                Margin.Top.XLARGE,
-                Margin.Bottom.MEDIUM
+        add(company, subName, logo);
+        H2 header = new H2("Fresh flowers for every special moment");
+        header.getStyle()
+                .set("margin", "0")
+                .set("color", "gray");
+
+        Paragraph line1 = new Paragraph(
+                "Flower Shop Order offers beautiful fresh flowers and elegant bouquets for every occasion. " +
+                        "Our shop creates unique floral arrangements for birthdays, weddings, anniversaries and many other special moments. " +
+                        "We always focus on quality, creativity and customer satisfaction."
         );
 
-        add(header);
+        line1.setWidth("500px");
 
-        add(new Paragraph("It’s a place where you can grow your own UI 🤗"));
+        line1.getStyle()
+                .set("font-size", "22px")
+                .set("line-height", "1.6")
+                .set("text-align", "left");
 
-        setSizeFull();
+        Paragraph line2 = new Paragraph(
+                "With carefully selected flowers and modern designs, we help our customers express emotions in a special way. " +
+                        "We provide friendly service, flexible orders and reliable delivery. " +
+                        "Every bouquet is prepared with attention to detail and love for flowers."
+        );
+
+        line2.setWidth("500px");
+
+        line2.getStyle()
+                .set("font-size", "22px")
+                .set("line-height", "1.6")
+                .set("text-align", "left");
+
+        Paragraph line3 = new Paragraph(
+                "Flower Shop Order is more than just a flower store — it is a place where beauty and emotions come together. " +
+                        "Whether you need a romantic bouquet, a festive decoration or a simple gift, we are here to help. " +
+                        "Trust our experience and passion for creating unforgettable floral moments."
+        );
+
+        line3.setWidth("500px");
+
+        line3.getStyle()
+                .set("font-size", "22px")
+                .set("line-height", "1.6")
+                .set("text-align", "left");
+
+        H1 shopName = new H1("Flower Shop Order");
+        H2 street = new H2("Spengergasse 20");
+        H3 city = new H3("1050 Wien");
+
+        add(company, subName, logo, line1, line2, line3, shopName, street, city);
+
+        setWidthFull();
+        setMinHeight("100vh");
 
         setJustifyContentMode(JustifyContentMode.CENTER);
 
@@ -46,5 +99,7 @@ public class FlowerShopOrderView extends VerticalLayout {
         );
 
         getStyle().set("text-align", "center");
+
+        getStyle().set("background-color", "#ffd6e7");
     }
 }
