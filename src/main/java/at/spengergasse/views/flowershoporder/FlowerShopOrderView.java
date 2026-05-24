@@ -7,42 +7,25 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
-
 @PageTitle("Home")
 @Route(value = "", layout = MainLayout.class)
-
-
 public class FlowerShopOrderView extends VerticalLayout {
 
     public FlowerShopOrderView() {
 
         setSpacing(false);
-        setAlignItems(Alignment.CENTER);
 
-        H1 company = new H1("Flower Shop Order");
-        company.getStyle()
-                .set("font-family", "cursive")
-                .set("font-size", "6rem")
-                .set("margin", "0");
+        VerticalLayout topHeader = getHeader();
 
-        H2 subName = new H2("... beautiful flowers for every occasion ...");
-        subName.getStyle()
-                .set("margin", "0")
-                .set("color", "gray");
+        HorizontalLayout logoText = new HorizontalLayout();
 
         Image logo = new Image("images/logo.png", "Flower Shop Logo");
-        logo.setWidth("350px");
-
-        add(company, subName, logo);
-        H2 header = new H2("Fresh flowers for every special moment");
-        header.getStyle()
-                .set("margin", "0")
-                .set("color", "gray");
+        logo.setWidth("500px");
 
         Paragraph line1 = new Paragraph(
                 "Flower Shop Order offers beautiful fresh flowers and elegant bouquets for every occasion. " +
@@ -51,11 +34,13 @@ public class FlowerShopOrderView extends VerticalLayout {
         );
 
         line1.setWidth("500px");
-
         line1.getStyle()
                 .set("font-size", "22px")
                 .set("line-height", "1.6")
                 .set("text-align", "left");
+
+        logoText.add(logo, line1);
+        logoText.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
 
         Paragraph line2 = new Paragraph(
                 "With carefully selected flowers and modern designs, we help our customers express emotions in a special way. " +
@@ -64,7 +49,6 @@ public class FlowerShopOrderView extends VerticalLayout {
         );
 
         line2.setWidth("500px");
-
         line2.getStyle()
                 .set("font-size", "22px")
                 .set("line-height", "1.6")
@@ -77,29 +61,49 @@ public class FlowerShopOrderView extends VerticalLayout {
         );
 
         line3.setWidth("500px");
-
         line3.getStyle()
                 .set("font-size", "22px")
                 .set("line-height", "1.6")
                 .set("text-align", "left");
 
-        H1 shopName = new H1("Flower Shop Order");
-        H2 street = new H2("Spengergasse 20");
+        HorizontalLayout address = new HorizontalLayout();
+
+        H3 shopName = new H3("Flower Shop Order");
+        H3 street = new H3("Spengergasse 20");
         H3 city = new H3("1050 Wien");
 
-        add(company, subName, logo, line1, line2, line3, shopName, street, city);
+        address.add(shopName, street, city);
+
+        add(topHeader, logoText, line2, line3, address);
 
         setWidthFull();
         setMinHeight("100vh");
 
-        setJustifyContentMode(JustifyContentMode.CENTER);
+        setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
 
-        setDefaultHorizontalComponentAlignment(
-                FlexComponent.Alignment.CENTER
-        );
+        getStyle()
+                .set("text-align", "center")
+                .set("background-color", "#ffd6e7");
+    }
 
-        getStyle().set("text-align", "center");
+    public static VerticalLayout getHeader() {
 
-        getStyle().set("background-color", "#ffd6e7");
+        VerticalLayout header = new VerticalLayout();
+
+        H1 company = new H1("Flower Shop Order");
+        company.getStyle()
+                .set("font-family", "cursive")
+                .set("font-size", "6rem")
+                .set("margin", "0");
+
+        H2 subName = new H2("... beautiful flowers for every occasion ...");
+        subName.getStyle()
+                .set("margin", "0")
+                .set("color", "gray");
+
+        header.add(company, subName);
+        header.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
+
+        return header;
     }
 }

@@ -25,28 +25,46 @@
 
     <dependencies>
 
+        <!-- Vaadin Web Application -->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- Spring Boot Web Server / Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- PostgreSQL Datenbank -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Spring Data JPA für Datenbankzugriff -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- Faker für Testdaten -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- Development Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -54,6 +72,7 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -78,16 +97,20 @@
         <defaultGoal>spring-boot:run</defaultGoal>
 
         <plugins>
+
+            <!-- Spring Boot Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!-- Vaadin Plugin -->
             <plugin>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.version}</version>
             </plugin>
+
         </plugins>
     </build>
 
