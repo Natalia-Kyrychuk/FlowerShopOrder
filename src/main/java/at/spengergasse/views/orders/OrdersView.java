@@ -25,6 +25,9 @@ public class OrdersView extends VerticalLayout {
     private final Button buttonAdd10 =
             new Button("Add 10 orders");
 
+    private final Button buttonAddWrong =
+            new Button("Add WRONG order");
+
     public OrdersView(FlowerOrderService flowerOrderService) {
         this.flowerOrderService = flowerOrderService;
 
@@ -34,7 +37,7 @@ public class OrdersView extends VerticalLayout {
         grid.setSizeFull();
 
         HorizontalLayout buttons =
-                new HorizontalLayout(buttonRemoveAll, buttonAdd10);
+                new HorizontalLayout(buttonRemoveAll, buttonAdd10, buttonAddWrong);
 
         buttons.setSpacing(true);
 
@@ -44,6 +47,9 @@ public class OrdersView extends VerticalLayout {
 
         buttonAdd10.addClickListener(
                 b -> add10Orders());
+
+        buttonAddWrong.addClickListener(
+                b -> addWrongOrder());
 
         reload();
     }
@@ -62,5 +68,15 @@ public class OrdersView extends VerticalLayout {
         flowerOrderService.addTestOrders();
         buttonRemoveAll.setEnabled(true);
         reload();
+    }
+
+    private void addWrongOrder() {
+        try {
+            flowerOrderService.addWrongOrder();
+            reload();
+        }
+        catch (Exception e) {
+            com.vaadin.flow.component.notification.Notification.show(e.getMessage());
+        }
     }
 }

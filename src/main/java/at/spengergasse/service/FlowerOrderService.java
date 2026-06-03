@@ -60,4 +60,17 @@ public class FlowerOrderService {
         repository.save(order2);
         repository.save(order3);
     }
+
+    public void addWrongOrder() {
+        FlowerOrder order = new FlowerOrder(
+                3001L,
+                java.time.LocalDate.now(),
+                "Rose",
+                1,
+                -20.00,
+                true
+        );
+
+        repository.save(order);
+    }
 }
