@@ -1,19 +1,19 @@
 package at.spengergasse;
 
 import at.spengergasse.model.FlowerOrder;
-import at.spengergasse.repository.FlowerOrderRepository;
+import at.spengergasse.service.FlowerOrderService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
-public class DataInitializer implements CommandLineRunner
-{
-    private final FlowerOrderRepository flowerOrderRepository;
+public class DataInitializer implements CommandLineRunner {
 
-    public DataInitializer(FlowerOrderRepository flowerOrderRepository) {
-        this.flowerOrderRepository = flowerOrderRepository;
+    private final FlowerOrderService flowerOrderService;
+
+    public DataInitializer(FlowerOrderService flowerOrderService) {
+        this.flowerOrderService = flowerOrderService;
     }
 
     @Override
@@ -39,15 +39,15 @@ public class DataInitializer implements CommandLineRunner
                 false
         );
 
-        flowerOrderRepository.save(order1);
-        flowerOrderRepository.save(order2);
-        flowerOrderRepository.save(order3);
+        flowerOrderService.save(order1);
+        flowerOrderService.save(order2);
+        flowerOrderService.save(order3);
 
         System.out.println("Orders saved");
 
         System.out.println("Alle Bestellungen:");
 
-        flowerOrderRepository.findAll()
+        flowerOrderService.findAll()
                 .forEach(System.out::println);
     }
 }
