@@ -19,7 +19,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        FlowerOrder order1 = new FlowerOrder();
+        FlowerOrder order1 = new FlowerOrder(
+                1000L,
+                LocalDate.now(),
+                "Rose",
+                1,
+                3.50,
+                false
+        );
 
         FlowerOrder order2 = new FlowerOrder(
                 1001L,

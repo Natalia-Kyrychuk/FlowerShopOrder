@@ -1,5 +1,7 @@
 package at.spengergasse.views.orders;
 
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Span;
 import at.spengergasse.model.FlowerOrder;
 import at.spengergasse.service.FlowerOrderService;
 import at.spengergasse.views.MainLayout;
@@ -15,7 +17,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class OrdersView extends VerticalLayout {
 
     private final Grid<FlowerOrder> grid =
-            new Grid<>(FlowerOrder.class, true);
+            new Grid<>(FlowerOrder.class, false);
 
     private final FlowerOrderService flowerOrderService;
 
@@ -33,6 +35,43 @@ public class OrdersView extends VerticalLayout {
 
         setSpacing(true);
         setSizeFull();
+
+        grid.addColumn(FlowerOrder::getOrderId)
+                .setHeader("Order ID")
+                .setSortable(true);
+
+        grid.addColumn(FlowerOrder::getOrderDate)
+                .setHeader("Order Date")
+                .setSortable(true);
+
+        Image flowerImage = new Image("images/logo.png", "Flower");
+        flowerImage.setWidth("32px");
+
+        grid.addColumn(FlowerOrder::getFlower)
+                .setHeader(new HorizontalLayout(
+                        flowerImage,
+                        new Span("Flower")
+                ))
+                .setSortable(true);
+
+        grid.addColumn(FlowerOrder::getPrice)
+                .setHeader("Price")
+                .setSortable(true);
+
+        grid.addColumn(FlowerOrder::getQuantity)
+                .setHeader("Quantity")
+                .setSortable(true);
+
+        grid.addComponentColumn(order -> {
+                    com.vaadin.flow.component.checkbox.Checkbox cb =
+                            new com.vaadin.flow.component.checkbox.Checkbox(order.getDelivery());
+
+                    cb.setReadOnly(true);
+                    return cb;
+                })
+                .setHeader("Delivery")
+                .setSortable(true)
+                .setComparator(FlowerOrder::getDelivery);
 
         grid.setSizeFull();
 

@@ -36,12 +36,6 @@ public class FlowerOrder
     };
 
     public FlowerOrder() {
-        setOrderId();
-        setOrderDate(LocalDate.now());
-        setFlower("Rose");
-        setQuantity(1);
-        setPrice(3.50);
-        setDelivery(false);
     }
 
     public FlowerOrder(
