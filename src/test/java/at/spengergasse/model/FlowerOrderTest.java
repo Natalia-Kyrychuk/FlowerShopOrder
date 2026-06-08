@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+
+import java.util.Set;
 
 class FlowerOrderTest {
 
@@ -129,4 +135,25 @@ class FlowerOrderTest {
 
         assertEquals(order1, order2);
     }
+    @Test
+    void beanValidationShouldFindInvalidValues() {
+
+        FlowerOrder order = new FlowerOrder();
+
+        order.setOrderId(1L);
+        order.setOrderDate(null);
+        order.setDelivery(null);
+
+        ValidatorFactory factory =
+                Validation.buildDefaultValidatorFactory();
+
+        Validator validator =
+                factory.getValidator();
+
+        Set<ConstraintViolation<FlowerOrder>> violations =
+                validator.validate(order);
+
+        assertFalse(violations.isEmpty());
+    }
+
 }

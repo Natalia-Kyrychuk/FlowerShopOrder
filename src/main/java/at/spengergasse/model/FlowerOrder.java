@@ -9,7 +9,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.EqualsAndHashCode;
 import java.util.Arrays;
-
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 @Getter
 @Setter
 @ToString
@@ -19,10 +22,26 @@ public class FlowerOrder
 {
     @Id
     private Long orderId;
+
+    @NotNull(message = "Order date is required")
     private LocalDate orderDate;
+
+    @NotNull(message = "Flower is required")
+    @Pattern(
+            regexp = "Rose|Tulip|Lily|Sunflower|Orchid",
+            message = "Flower must be Rose, Tulip, Lily, Sunflower or Orchid"
+    )
     private String flower;
+
+    @NotNull(message = "Quantity is required")
+    @Min(value = 1, message = "Quantity must be at least 1")
     private Integer quantity;
+
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "1.0", message = "Price must be at least 1.00 Euro")
     private Double price;
+
+    @NotNull(message = "Delivery is required")
     private Boolean delivery;
 
     private static Long nextId = 1000L;
