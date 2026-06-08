@@ -3,7 +3,7 @@ package at.spengergasse.service;
 import at.spengergasse.model.FlowerOrder;
 import at.spengergasse.repository.FlowerOrderRepository;
 import org.springframework.stereotype.Service;
-
+import at.spengergasse.model.FlowerOrderException;
 import java.util.List;
 
 @Service
@@ -77,5 +77,24 @@ public class FlowerOrderService {
     public void removeOrder(Long orderId) {
 
         repository.deleteById(orderId);
+    }
+
+    public void oneMore(Long orderId) {
+
+        if (orderId == null) {
+            throw new FlowerOrderException("No Order ID!");
+        }
+
+        FlowerOrder order =
+                repository.findById(orderId)
+                        .orElseThrow(() ->
+                                new FlowerOrderException(
+                                        "Order with the ID " + orderId + " not found!"
+                                )
+                        );
+
+        order.setQuantity(order.getQuantity() + 1);
+
+        repository.save(order);
     }
 }

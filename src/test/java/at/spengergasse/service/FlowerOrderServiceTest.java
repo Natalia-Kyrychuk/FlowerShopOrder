@@ -4,7 +4,7 @@ import at.spengergasse.model.FlowerOrder;
 import at.spengergasse.model.FlowerOrderException;
 import at.spengergasse.repository.FlowerOrderRepository;
 import org.junit.jupiter.api.Test;
-
+import java.util.Optional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -103,5 +103,34 @@ class FlowerOrderServiceTest {
         service.removeOrder(2001L);
 
         verify(repository).deleteById(2001L);
+    }
+
+    @Test
+    void oneMoreShouldIncreaseQuantityAndSaveOrder() {
+
+        FlowerOrderRepository repository =
+                mock(FlowerOrderRepository.class);
+
+        FlowerOrderService service =
+                new FlowerOrderService(repository);
+
+        FlowerOrder order =
+                new FlowerOrder(
+                        2001L,
+                        LocalDate.now(),
+                        "Rose",
+                        2,
+                        7.0,
+                        false
+                );
+
+        when(repository.findById(2001L))
+                .thenReturn(Optional.of(order));
+
+        service.oneMore(2001L);
+
+        assertEquals(3, order.getQuantity());
+
+        verify(repository).save(order);
     }
 }
