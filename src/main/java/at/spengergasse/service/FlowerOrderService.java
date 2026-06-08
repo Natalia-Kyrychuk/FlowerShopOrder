@@ -73,4 +73,9 @@ public class FlowerOrderService {
 
         repository.save(order);
     }
+
+    public void removeOrder(Long orderId) {
+
+        repository.deleteById(orderId);
+    }
 }

@@ -72,7 +72,11 @@ public class OrdersView extends VerticalLayout {
                 .setHeader("Delivery")
                 .setSortable(true)
                 .setComparator(FlowerOrder::getDelivery);
-
+        grid.addComponentColumn(order ->
+                        new Button("Delete",
+                                e -> removeSelected(order.getOrderId())))
+                .setHeader("Task")
+                .setSortable(false);
         grid.setSizeFull();
 
         HorizontalLayout buttons =
@@ -117,5 +121,12 @@ public class OrdersView extends VerticalLayout {
         catch (Exception e) {
             com.vaadin.flow.component.notification.Notification.show(e.getMessage());
         }
+    }
+
+    private void removeSelected(Long orderId) {
+
+        flowerOrderService.removeOrder(orderId);
+
+        reload();
     }
 }
